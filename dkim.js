@@ -22,18 +22,20 @@ function DKIM( signature ) {
 }
 
 DKIM.fields = {
-  v: 'version',
   a: 'algorithm',
-  c: 'canonical',
-  q: 'query',
-  l: 'length',
-  t: 'timestamp',
-  x: 'expires',
-  h: 'headers',
-  bh: 'hash',
-  s: 'selector',
-  d: 'domain',
   b: 'signature'
+  bh: 'hash',
+  c: 'canonical',
+  d: 'domain',
+  h: 'headers',
+  i: 'identity',
+  l: 'length',
+  q: 'query',
+  s: 'selector',
+  t: 'timestamp',
+  v: 'version',
+  x: 'expires',
+  z: 'copied_headers'
 }
 
 DKIM.prototype = {
