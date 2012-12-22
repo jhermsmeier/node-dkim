@@ -4,13 +4,16 @@ function DKIM( signature ) {
   if( !(this instanceof DKIM) )
     return new DKIM( signature )
   
-  var field, fields = signature.split( '; ' )
+  var field, fields = signature.split( /;\s+/g )
   
   for( var i in fields ) {
     if( field = fields[i].match( /^([a-z]+?)=(.+?)$/i ) ) {
       this[ DKIM.fields[ field[1] ] ] = field[2]
     }
   }
+  
+  // Remove folding whitespace from signature
+  this.signature = this.signature.replace( /\s/g, '' )
   
 }
 
