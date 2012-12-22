@@ -14,6 +14,10 @@ function DKIM( signature ) {
   
   // Remove folding whitespace from signature
   this.signature = this.signature.replace( /\s/g, '' )
+  // Split up the query methods
+  this.query = this.query.split( ':' )
+  // Split up copied header fields
+  this.copied_headers = this.copied_headers.split( '|' )
   
 }
 
