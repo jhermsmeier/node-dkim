@@ -10,16 +10,16 @@ function DKIM( signature ) {
 
 DKIM.fields = {
   v: 'version',
-  a: 'signing_algorithm',
-  c: 'canonicalization',
-  q: 'query_method',
+  a: 'algorithm',
+  c: 'canonical',
+  q: 'query',
   l: 'length',
   t: 'timestamp',
   x: 'expires',
   h: 'headers',
-  bh: 'body_hash',
+  bh: 'hash',
   s: 'selector',
-  d: 'signing_domain',
+  d: 'domain',
   b: 'signature'
 }
 
