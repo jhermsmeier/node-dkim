@@ -4,7 +4,13 @@ function DKIM( signature ) {
   if( !(this instanceof DKIM) )
     return new DKIM( signature )
   
-  this.parse( signature )
+  var field, fields = signature.split( '; ' )
+  
+  for( var i in fields ) {
+    if( field = fields[i].match( /^([a-z]+?)=(.+?)$/i ) ) {
+      this[ DKIM.fields[ field[1] ] ] = field[2]
+    }
+  }
   
 }
 
@@ -24,18 +30,6 @@ DKIM.fields = {
 }
 
 DKIM.prototype = {
-  
-  parse: function( signature ) {
-    
-    var field, fields = signature.split( '; ' )
-    
-    for( var i in fields ) {
-      if( field = fields[i].match( /^([a-z]+?)=(.+?)$/i ) ) {
-        this[ DKIM.fields[ field[1] ] ] = field[2]
-      }
-    }
-    
-  }
   
 }
 
