@@ -1,0 +1,37 @@
+{
+  
+  "name": "dkim",
+  "version": "0.0.0",
+  "license": "MIT",
+  "description": "",
+  "kewords": [
+    "email", "mail", "dkim", "signature", "domainkeys",
+    "identified", "message"
+  ],
+  
+  "author": {
+    "name": "Jonas Hermsmeier",
+    "email": "jhermsmeier@googlemail.com",
+    "url": "http://jhermsmeier.de"
+  },
+  
+  "main": "dkim.js",
+  
+  "scripts": {
+    "test": "node test/"
+  },
+  
+  "dependencies": {
+    "mime-lib": ""
+  },
+  
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jhermsmeier/node-dkim.git"
+  },
+  
+  "bugs": {
+    "url": "https://github.com/jhermsmeier/node-dkim/issues"
+  }
+  
+}
