@@ -17,14 +17,6 @@
   
   "main": "dkim.js",
   
-  "scripts": {
-    "test": "node test/"
-  },
-  
-  "dependencies": {
-    "mime-lib": ""
-  },
-  
   "repository": {
     "type": "git",
     "url": "git://github.com/jhermsmeier/node-dkim.git"
