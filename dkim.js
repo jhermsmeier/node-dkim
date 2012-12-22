@@ -12,18 +12,22 @@ function DKIM( signature ) {
     }
   }
   
+  this.headers = this.headers.split( ':' )
   // Remove folding whitespace from signature
   this.signature = this.signature.replace( /\s/g, '' )
+  
   // Split up the query methods
-  this.query = this.query.split( ':' )
+  if( this.query )
+    this.query = this.query.split( ':' )
   // Split up copied header fields
-  this.copied_headers = this.copied_headers.split( '|' )
+  if( this.copied_headers )
+    this.copied_headers = this.copied_headers.split( '|' )
   
 }
 
 DKIM.fields = {
   a: 'algorithm',
-  b: 'signature'
+  b: 'signature',
   bh: 'hash',
   c: 'canonical',
   d: 'domain',
@@ -35,7 +39,7 @@ DKIM.fields = {
   t: 'timestamp',
   v: 'version',
   x: 'expires',
-  z: 'copied_headers'
+  z: 'copied_headers',
 }
 
 DKIM.prototype = {
