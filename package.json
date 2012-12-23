@@ -3,7 +3,7 @@
   "name": "dkim",
   "version": "0.0.2",
   "license": "MIT",
-  "description": "",
+  "description": "DomainKeys Identified Mail",
   "kewords": [
     "email", "mail", "dkim", "signature", "domainkeys",
     "identified", "message"
