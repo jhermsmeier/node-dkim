@@ -17,6 +17,15 @@
   
   "main": "dkim.js",
   
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha ./test"
+  },
+  
+  "devDependencies": {
+    "mocha": "",
+    "envelope": ""
+  },
+  
   "repository": {
     "type": "git",
     "url": "git://github.com/jhermsmeier/node-dkim.git"
