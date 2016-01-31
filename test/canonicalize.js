@@ -1,35 +1,41 @@
-
-var dkim = require( '../' )
+var DKIM = require( '..' )
 var assert = require( 'assert' )
 var fs = require( 'fs' )
 
-var read = fs.readFileSync
-var header = read( __dirname + '/data/gmail.headers' )
-
-module.exports = {
+suite( 'DKIM', function() {
   
-  'canonicalizeHeader( header, undefined )': function() {
-    dkim.util.canonicalizeHeader( header )
-  },
+  suite( 'canonicalizeHeader()', function() {
+    
+    var header
+    
+    suiteSetup( function() {
+      header = fs.readFileSync( __dirname + '/data/gmail.headers' )
+    })
+    
+    test( 'undefined', function() {
+      DKIM.util.canonicalizeHeader( header )
+    })
+    
+    test( '"simple"', function() {
+      DKIM.util.canonicalizeHeader( header, 'simple' )
+    })
+    
+    test( '"relaxed"', function() {
+      DKIM.util.canonicalizeHeader( header, 'relaxed' )
+    })
+    
+    test( '"simple/relaxed"', function() {
+      DKIM.util.canonicalizeHeader( header, 'simple/relaxed' )
+    })
+    
+    test( '"relaxed/relaxed"', function() {
+      DKIM.util.canonicalizeHeader( header, 'relaxed/relaxed' )
+    })
+    
+    test( '"simple/simple"', function() {
+      DKIM.util.canonicalizeHeader( header, 'simple/simple' )
+    })
+    
+  })
   
-  'canonicalizeHeader( header, "simple" )': function() {
-    dkim.util.canonicalizeHeader( header, 'simple' )
-  },
-  
-  'canonicalizeHeader( header, "relaxed" )': function() {
-    dkim.util.canonicalizeHeader( header, 'relaxed' )
-  },
-  
-  'canonicalizeHeader( header, "simple/relaxed" )': function() {
-    dkim.util.canonicalizeHeader( header, 'simple/relaxed' )
-  },
-  
-  'canonicalizeHeader( header, "relaxed/relaxed" )': function() {
-    dkim.util.canonicalizeHeader( header, 'relaxed/relaxed' )
-  },
-  
-  'canonicalizeHeader( header, "simple/simple" )': function() {
-    dkim.util.canonicalizeHeader( header, 'simple/simple' )
-  },
-  
-}
+})
