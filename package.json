@@ -1,38 +1,37 @@
 {
-  
   "name": "dkim",
   "version": "0.0.3",
+  "description": "DomainKeys Identified Mail (DKIM)",
   "license": "MIT",
-  "description": "DomainKeys Identified Mail",
-  "kewords": [
-    "email", "mail", "dkim", "signature", "domainkeys",
-    "identified", "message"
+  "keywords": [
+    "email",
+    "mail",
+    "dkim",
+    "signature",
+    "domainkeys",
+    "identified",
+    "message"
   ],
-  
-  "author": {
-    "name": "Jonas Hermsmeier",
-    "email": "jhermsmeier@googlemail.com",
-    "url": "http://jhermsmeier.de"
-  },
-  
   "main": "dkim.js",
-  
-  "scripts": {
-    "test": "./node_modules/mocha/bin/mocha ./test"
-  },
-  
+  "author": "Jonas Hermsmeier <jhermsmeier@gmail.com> (https://jhermsmeier.de/)",
+  "dependencies": {},
   "devDependencies": {
-    "mocha": "",
-    "envelope": ""
+    "matcha": "~0.6.1",
+    "mocha": "~2.4.5"
   },
-  
+  "scripts": {
+    "test": "mocha --require assert --ui exports",
+    "benchmark": "matcha"
+  },
+  "homepage": "https://github.com/jhermsmeier/node-dkim",
   "repository": {
     "type": "git",
-    "url": "git://github.com/jhermsmeier/node-dkim.git"
+    "url": "git+https://github.com/jhermsmeier/node-dkim.git"
   },
-  
   "bugs": {
     "url": "https://github.com/jhermsmeier/node-dkim/issues"
+  },
+  "directories": {
+    "test": "test"
   }
-  
 }
