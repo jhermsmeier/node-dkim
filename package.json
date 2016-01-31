@@ -12,9 +12,12 @@
     "identified",
     "message"
   ],
-  "main": "dkim.js",
+  "main": "lib/dkim.js",
   "author": "Jonas Hermsmeier <jhermsmeier@gmail.com> (https://jhermsmeier.de/)",
-  "dependencies": {},
+  "dependencies": {
+    "dkim-key": "~1.1.0",
+    "dkim-signature": "~1.1.1"
+  },
   "devDependencies": {
     "matcha": "~0.6.1",
     "mocha": "~2.4.5"
