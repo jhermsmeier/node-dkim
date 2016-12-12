@@ -19,10 +19,12 @@
     "dkim-signature": "~1.1.1"
   },
   "devDependencies": {
+    "jsdoc-to-markdown": "~2.0.1",
     "mocha": "~3.2.0"
   },
   "scripts": {
-    "test": "mocha --ui tdd"
+    "test": "mocha --ui tdd",
+    "doc": "jsdoc2md 'lib/**/*.js' -d 3 -t .github/README-TEMPLATE.hbs --separators --param-list-format list --global-index-format none > README.md"
   },
   "homepage": "https://github.com/jhermsmeier/node-dkim",
   "repository": {
