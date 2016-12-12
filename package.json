@@ -2,6 +2,7 @@
   "name": "dkim",
   "version": "0.1.0",
   "description": "DomainKeys Identified Mail (DKIM)",
+  "author": "Jonas Hermsmeier <jhermsmeier@gmail.com> (https://jhermsmeier.de)",
   "license": "MIT",
   "keywords": [
     "email",
@@ -13,18 +14,15 @@
     "message"
   ],
   "main": "lib/dkim.js",
-  "author": "Jonas Hermsmeier <jhermsmeier@gmail.com> (https://jhermsmeier.de/)",
   "dependencies": {
-    "dkim-key": "~1.1.0",
+    "dkim-key": "~1.1.1",
     "dkim-signature": "~1.1.1"
   },
   "devDependencies": {
-    "matcha": "~0.6.1",
-    "mocha": "~2.4.5"
+    "mocha": "~3.2.0"
   },
   "scripts": {
-    "test": "mocha --ui tdd",
-    "benchmark": "matcha"
+    "test": "mocha --ui tdd"
   },
   "homepage": "https://github.com/jhermsmeier/node-dkim",
   "repository": {
