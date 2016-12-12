@@ -1,3 +1,6 @@
 .*
+*.md
+*.log
+doc
+example
 test
-benchmark
