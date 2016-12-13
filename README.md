@@ -27,6 +27,7 @@ $ npm install --save dkim
     * [.TEMPFAIL](#DKIM.TEMPFAIL) : <code>String</code>
     * [.PERMFAIL](#DKIM.PERMFAIL) : <code>String</code>
     * [.getKey(domain, [selector], callback)](#DKIM.getKey)
+    * [.processBody(message, method)](#DKIM.processBody) ⇒ <code>String</code>
 
 
 -
@@ -106,3 +107,21 @@ Retrieve a domain key
 
 -
 
+<a name="DKIM.processBody"></a>
+
+#### DKIM.processBody(message, method) ⇒ <code>String</code>
+Canonicalize the message body according to
+methods defined in RFC[XXXX]
+
+**Kind**: static method of <code>[DKIM](#DKIM)</code>  
+**Throws**:
+
+- <code>Error</code> If canonicalization method is unsupported
+
+**Params**
+
+- message <code>Buffer</code> | <code>String</code>
+- method <code>String</code> - (simple|relaxed)
+
+
+-
