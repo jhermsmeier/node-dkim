@@ -1,0 +1,47 @@
+var assert = require( 'assert' )
+var DKIM = require( '..' )
+
+describe( 'DKIM', function() {
+
+  describe( '.getKey()', function() {
+
+    context( 'when key record exists', function() {
+
+      it( 'should parse & return the key', function( done ) {
+        DKIM.getKey( 'gmail.com', '20120113', function( error, key ) {
+          assert.ifError( error )
+          assert.equal( key instanceof DKIM.Key, true )
+          assert.equal( key.type, 'rsa' )
+          done()
+        })
+      })
+
+    })
+
+    context( 'when key record does not exist', function() {
+
+      it( 'should PERMFAIL if domain has no record', function( done ) {
+        DKIM.getKey( 'aa', function( error, key ) {
+          assert.equal( key, null )
+          assert.equal( error instanceof Error, true )
+          assert.equal( error.code, DKIM.PERMFAIL )
+          done()
+        })
+      })
+
+      it( 'should PERMFAIL if TXT record is not a valid key', function( done ) {
+        DKIM.getKey( 'gmail.com', function( error, key ) {
+          assert.ok( key == null, 'key present' )
+          assert.equal( error instanceof Error, true )
+          assert.equal( error.code, DKIM.PERMFAIL )
+          done()
+        })
+      })
+
+      it( 'should TEMPFAIL if query fails to respond' )
+
+    })
+
+  })
+
+})
