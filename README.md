@@ -22,10 +22,11 @@ $ npm install --save dkim
         * [new DKIM.Signature()](#new_DKIM.Signature_new)
     * [.Key](#DKIM.Key)
         * [new DKIM.Key()](#new_DKIM.Key_new)
-    * [.NONE](#DKIM.NONE) : <code>Number</code>
-    * [.OK](#DKIM.OK) : <code>Number</code>
-    * [.TEMPFAIL](#DKIM.TEMPFAIL) : <code>Number</code>
-    * [.PERMFAIL](#DKIM.PERMFAIL) : <code>Number</code>
+    * [.NONE](#DKIM.NONE) : <code>String</code>
+    * [.OK](#DKIM.OK) : <code>String</code>
+    * [.TEMPFAIL](#DKIM.TEMPFAIL) : <code>String</code>
+    * [.PERMFAIL](#DKIM.PERMFAIL) : <code>String</code>
+    * [.getKey(domain, [selector], callback)](#DKIM.getKey)
 
 
 -
@@ -64,38 +65,44 @@ DKIM Key
 
 <a name="DKIM.NONE"></a>
 
-#### DKIM.NONE : <code>Number</code>
+#### DKIM.NONE : <code>String</code>
 **Kind**: static property of <code>[DKIM](#DKIM)</code>  
 
 -
 
 <a name="DKIM.OK"></a>
 
-#### DKIM.OK : <code>Number</code>
+#### DKIM.OK : <code>String</code>
 **Kind**: static property of <code>[DKIM](#DKIM)</code>  
 
 -
 
 <a name="DKIM.TEMPFAIL"></a>
 
-#### DKIM.TEMPFAIL : <code>Number</code>
+#### DKIM.TEMPFAIL : <code>String</code>
 **Kind**: static property of <code>[DKIM](#DKIM)</code>  
 
 -
 
 <a name="DKIM.PERMFAIL"></a>
 
-#### DKIM.PERMFAIL : <code>Number</code>
+#### DKIM.PERMFAIL : <code>String</code>
 **Kind**: static property of <code>[DKIM](#DKIM)</code>  
 
 -
 
-<a name="Header"></a>
+<a name="DKIM.getKey"></a>
 
-### Header() ⇒ <code>[Header](#Header)</code>
-Header
+#### DKIM.getKey(domain, [selector], callback)
+Retrieve a domain key
 
-**Kind**: global function  
+**Kind**: static method of <code>[DKIM](#DKIM)</code>  
+**Params**
+
+- domain <code>String</code>
+- [selector] <code>String</code>
+- callback <code>function</code>
+
 
 -
 
