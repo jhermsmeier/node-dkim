@@ -28,6 +28,9 @@ $ npm install --save dkim
     * [.PERMFAIL](#DKIM.PERMFAIL) : <code>String</code>
     * [.getKey(domain, [selector], callback)](#DKIM.getKey)
     * [.processBody(message, method)](#DKIM.processBody) ⇒ <code>String</code>
+    * [.processHeader(message, method)](#DKIM.processHeader) ⇒ <code>String</code>
+    * [.verifySignature(body, headers, callback)](#DKIM.verifySignature)
+    * [.verify(message, callback)](#DKIM.verify)
 
 
 -
@@ -98,6 +101,11 @@ DKIM Key
 Retrieve a domain key
 
 **Kind**: static method of <code>[DKIM](#DKIM)</code>  
+**Todo**
+
+- [ ] DNS seems to FORMERR on unregistered / expired domains,
+which maybe should be a TEMPFAIL (?)
+
 **Params**
 
 - domain <code>String</code>
@@ -125,3 +133,56 @@ methods defined in RFC[XXXX]
 
 
 -
+
+<a name="DKIM.processHeader"></a>
+
+#### DKIM.processHeader(message, method) ⇒ <code>String</code>
+Canonicalize the message header according to
+methods defined in RFC[XXXX]
+
+**Kind**: static method of <code>[DKIM](#DKIM)</code>  
+**Throws**:
+
+- <code>Error</code> If canonicalization method is unsupported
+
+**Params**
+
+- message <code>Buffer</code> | <code>String</code>
+- method <code>String</code> - (simple|relaxed)
+
+
+-
+
+<a name="DKIM.verifySignature"></a>
+
+#### DKIM.verifySignature(body, headers, callback)
+Verify a message signature
+
+**Kind**: static method of <code>[DKIM](#DKIM)</code>  
+**Params**
+
+- body <code>Buffer</code>
+- headers <code>Array</code>
+- callback <code>function</code>
+
+
+-
+
+<a name="DKIM.verify"></a>
+
+#### DKIM.verify(message, callback)
+Verify a message's signatures
+
+**Kind**: static method of <code>[DKIM](#DKIM)</code>  
+**Throws**:
+
+- <code>Error</code> If input is not a buffer
+
+**Params**
+
+- message <code>Buffer</code>
+- callback <code>function</code>
+
+
+-
+
