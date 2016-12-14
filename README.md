@@ -28,7 +28,7 @@ $ npm install --save dkim
     * [.PERMFAIL](#DKIM.PERMFAIL) : <code>String</code>
     * [.getKey(domain, [selector], callback)](#DKIM.getKey)
     * [.processBody(message, method)](#DKIM.processBody) ⇒ <code>String</code>
-    * [.processHeader(message, method)](#DKIM.processHeader) ⇒ <code>String</code>
+    * [.processHeader(header, signHeaders, method)](#DKIM.processHeader) ⇒ <code>String</code>
     * [.verifySignature(body, headers, callback)](#DKIM.verifySignature)
     * [.verify(message, callback)](#DKIM.verify)
 
@@ -105,6 +105,8 @@ Retrieve a domain key
 
 - [ ] DNS seems to FORMERR on unregistered / expired domains,
 which maybe should be a TEMPFAIL (?)
+- [ ] make this `public_key = dkim_find_key(q_val, d_val, s_val)`,
+where `*_val` are the signature's attribute values
 
 **Params**
 
@@ -136,7 +138,7 @@ methods defined in RFC[XXXX]
 
 <a name="DKIM.processHeader"></a>
 
-#### DKIM.processHeader(message, method) ⇒ <code>String</code>
+#### DKIM.processHeader(header, signHeaders, method) ⇒ <code>String</code>
 Canonicalize the message header according to
 methods defined in RFC[XXXX]
 
@@ -147,7 +149,8 @@ methods defined in RFC[XXXX]
 
 **Params**
 
-- message <code>Buffer</code> | <code>String</code>
+- header <code>Buffer</code> | <code>String</code>
+- signHeaders <code>Array</code>
 - method <code>String</code> - (simple|relaxed)
 
 
