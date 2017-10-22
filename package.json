@@ -15,8 +15,8 @@
   ],
   "main": "lib/dkim.js",
   "dependencies": {
-    "dkim-key": "~1.1.1",
-    "dkim-signature": "~1.1.1"
+    "dkim-key": "git+https://github.com/fuse-mars/node-dkim-key.git",
+    "dkim-signature": "git+https://github.com/fuse-mars/node-dkim-signature.git"
   },
   "devDependencies": {
     "jsdoc-to-markdown": "~2.0.1",
