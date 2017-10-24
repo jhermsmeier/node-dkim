@@ -142,6 +142,7 @@ methods defined in RFC[XXXX]
 #### DKIM.processHeader(headers, signHeaders, method) ⇒ <code>String</code>
 Canonicalize the message header according to
 methods defined in RFC[6376]
+
 example usage: `DKIM.processHeader([ 'A: X', 'B : Y\t\r\n\tZ  '], ['A'], 'relaxed')`
 
 **Kind**: static method of <code>[DKIM](#DKIM)</code>  
