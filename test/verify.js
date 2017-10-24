@@ -32,8 +32,7 @@ describe('DKIM', function () {
 
       it('returns an object with verified set to true', function (done) {
 
-        // @NOTE we add one line at the end of the raw message
-        raw = raw + '\n'
+        // "raw" is a string, so we have to convert new lines to "text-file's new lines"
         let message = new Buffer(raw.replace(/\n/g, '\r\n'))
 
         DKIM.verify(message, function (e, res) {
