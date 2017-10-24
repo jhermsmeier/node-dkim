@@ -1,3 +1,4 @@
+'use strict'
 var assert = require('assert')
 var raw = require('./data/raw-message')
 var DKIM = require('..')
