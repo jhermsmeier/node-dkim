@@ -16,10 +16,10 @@ describe('DKIM', function () {
 
         var result = processSignature(headers, signatureHeader)
 
-        assert.ok(headers.includes(signatureHeader))
-        assert.ok(headers.includes(otherSignatureHeader))
-        assert.ok(result.includes(signatureHeader))
-        assert.ok(!result.includes(otherSignatureHeader))
+        assert.ok(headers.indexOf(signatureHeader) > -1)
+        assert.ok(headers.indexOf(otherSignatureHeader) > -1)
+        assert.ok(result.indexOf(signatureHeader) > -1)
+        assert.ok(!result.indexOf(otherSignatureHeader) > -1)
       })
     })
 
