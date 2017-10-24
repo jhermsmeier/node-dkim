@@ -1,4 +1,3 @@
-'use strict'
 var assert = require( 'assert' )
 var crypto = require( 'crypto' )
 var DKIM = require( '..' )
