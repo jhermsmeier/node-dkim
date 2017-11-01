@@ -31,9 +31,11 @@ describe( 'DKIM', function() {
 
       it( 'PERMFAIL if TXT record is not a valid key', function( done ) {
         DKIM.getKey( 'gmail.com', function( error, key ) {
-          assert.ok( key == null, 'key present' )
-          assert.equal( error instanceof Error, true )
-          assert.equal( error.code, DKIM.PERMFAIL )
+          
+          assert.ok( key, 'key instance present' )
+          assert.ok( key.key == null, 'key is null' )
+          assert.equal( error instanceof Error, true, 'error is an instance of Error Class' )
+          assert.equal( error.code, DKIM.PERMFAIL, 'Error code is PERMFAIL' )
           done()
         })
       })

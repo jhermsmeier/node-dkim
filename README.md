@@ -28,7 +28,7 @@ $ npm install --save dkim
     * [.PERMFAIL](#DKIM.PERMFAIL) : <code>String</code>
     * [.getKey(domain, [selector], callback)](#DKIM.getKey)
     * [.processBody(message, method)](#DKIM.processBody) ⇒ <code>String</code>
-    * [.processHeader(header, signHeaders, method)](#DKIM.processHeader) ⇒ <code>String</code>
+    * [.processHeader(headers, signHeaders, method)](#DKIM.processHeader) ⇒ <code>String</code>
     * [.verifySignature(body, headers, callback)](#DKIM.verifySignature)
     * [.verify(message, callback)](#DKIM.verify)
 
@@ -101,6 +101,7 @@ DKIM Key
 Retrieve a domain key
 
 **Kind**: static method of <code>[DKIM](#DKIM)</code>  
+**Note**: Throw error if the public key is not a Buffer  
 **Todo**
 
 - [ ] DNS seems to FORMERR on unregistered / expired domains,
@@ -138,9 +139,11 @@ methods defined in RFC[XXXX]
 
 <a name="DKIM.processHeader"></a>
 
-#### DKIM.processHeader(header, signHeaders, method) ⇒ <code>String</code>
+#### DKIM.processHeader(headers, signHeaders, method) ⇒ <code>String</code>
 Canonicalize the message header according to
-methods defined in RFC[XXXX]
+methods defined in RFC[6376]
+
+example usage: `DKIM.processHeader([ 'A: X', 'B : Y\t\r\n\tZ  '], ['A'], 'relaxed')`
 
 **Kind**: static method of <code>[DKIM](#DKIM)</code>  
 **Throws**:
@@ -149,7 +152,7 @@ methods defined in RFC[XXXX]
 
 **Params**
 
-- header <code>Buffer</code> | <code>String</code>
+- headers <code>Array.&lt;String&gt;</code> - Each header is formatted as `<field>: <value>`
 - signHeaders <code>Array</code>
 - method <code>String</code> - (simple|relaxed)
 
@@ -186,6 +189,52 @@ Verify a message's signatures
 - message <code>Buffer</code>
 - callback <code>function</code>
 
+
+-
+
+<a name="processSignature"></a>
+
+### processSignature()
+For messages that have multiple signatures,
+We want add headers to each signature without including signature headers of other signatures
+
+ex: 
+Input
+===== 1 =====
+[ 'DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;\r\n        d=fusemachines.com; s=google;\r\n        h=mime-version:from:date:message-id:subject:to;\r\n        bh=9w2H8ucfF1w3+Zqu9gpPcHgTU9GHPjw7E2HYHHlZEkw=;\r\n        b=iPc3RHh9oXL6+dvuPM0hYt1vdj6U4hN83BFxhumWsSXnFDFmbSG4OtXHPF823HoZAA\r\n         4MbFQu5VgfvAQ+FmnKyfON2WdJrAYicyslVXlcA6l0UKSGIH/0NHSqi/kX+4KEKaClY7\r\n         jZkXZZ8EIl5IUBdRRUWSsySFOtrQ/9IeAb6YM=',
+  'X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;\r\n        d=1e100.net; s=20161025;\r\n        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;\r\n        bh=9w2H8ucfF1w3+Zqu9gpPcHgTU9GHPjw7E2HYHHlZEkw=;\r\n        b=gaapyixgX52/f91ifJ2hxRuk13TLcG1ZKUo+Ci3j5a6rKCISPtmLXxwaXq5tghh5qg\r\n         r7S/oe5nDijJmdo1pIBDYGf9U+IDgIT9jHxP3pUoLwmhgnO3pr1di1JH0361ogIsGq/W\r\n         wATmvMTeEA1jAnKw8sr9Rb+jl2MUhqZLhL5Lhkdx/l5CCI0mfUmRAuv1XvGKdrPexM00\r\n         4UTNx9VeK8qYQ/jdf1BiX0ICrj/7e5hSImZ44ctHzn/HA3Htur6cBdFlAVHpW5/vPj0q\r\n         xnz5KQATcG0GmTX2rF27SGhAyPzRl+CZ0SDg9cGV2CvQ5kbDxsxOdzotR2X4hqksqMcC\r\n         S+EQ==',
+  'X-Gm-Message-State: AMCzsaVGkvHZbfZofPrsj3QKBCLwg3nAsBM8cWdu5BXU7v1zENATSRJC uiG27aeGnsU8HjTsRFYk1HqnrNYGNuxg5R7wfRrnRw==',
+  'X-Google-Smtp-Source: ABhQp+RznzRtpIGeOvxieUGeSxwDHEfX8SuSwMwZJSlXyU4GyjbzDw6PsT5DOScWWomiALUIa/1ktC1p5vFEDe7HcH8=',
+  'X-Received: by 10.200.3.87 with SMTP id w23mr15494938qtg.98.1508680821032; Sun, 22 Oct 2017 07:00:21 -0700 (PDT)',
+  'MIME-Version: 1.0',
+  'Received: by 10.12.141.15 with HTTP; Sun, 22 Oct 2017 07:00:00 -0700 (PDT)',
+  'From: Marcellin Nshimiyimana <mars@fusemachines.com>',
+  'Date: Sun, 22 Oct 2017 19:45:00 +0545',
+  'Message-ID: <CAOwpMi-cqMgYZ4BqFeP2QASdS54oqQ6diFfFQn+eVAVhHEC4yw@mail.gmail.com>',
+  'Subject: Test email',
+  'To: Mars-sprint <nmarcellin2@gmail.com>',
+  'Content-Type: multipart/alternative; boundary="f4030435c3286adbf3055c232081"' ]
+===== 2 =====
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;\r\n        d=fusemachines.com; s=google;\r\n        h=mime-version:from:date:message-id:subject:to;\r\n        bh=9w2H8ucfF1w3+Zqu9gpPcHgTU9GHPjw7E2HYHHlZEkw=;\r\n        b=iPc3RHh9oXL6+dvuPM0hYt1vdj6U4hN83BFxhumWsSXnFDFmbSG4OtXHPF823HoZAA\r\n         4MbFQu5VgfvAQ+FmnKyfON2WdJrAYicyslVXlcA6l0UKSGIH/0NHSqi/kX+4KEKaClY7\r\n         jZkXZZ8EIl5IUBdRRUWSsySFOtrQ/9IeAb6YM=
+=====
+
+Output
+======
+[ 'DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;\r\n        d=fusemachines.com; s=google;\r\n        h=mime-version:from:date:message-id:subject:to;\r\n        bh=9w2H8ucfF1w3+Zqu9gpPcHgTU9GHPjw7E2HYHHlZEkw=;\r\n        b=iPc3RHh9oXL6+dvuPM0hYt1vdj6U4hN83BFxhumWsSXnFDFmbSG4OtXHPF823HoZAA\r\n         4MbFQu5VgfvAQ+FmnKyfON2WdJrAYicyslVXlcA6l0UKSGIH/0NHSqi/kX+4KEKaClY7\r\n         jZkXZZ8EIl5IUBdRRUWSsySFOtrQ/9IeAb6YM=',
+  'X-Gm-Message-State: AMCzsaVGkvHZbfZofPrsj3QKBCLwg3nAsBM8cWdu5BXU7v1zENATSRJC uiG27aeGnsU8HjTsRFYk1HqnrNYGNuxg5R7wfRrnRw==',
+  'X-Google-Smtp-Source: ABhQp+RznzRtpIGeOvxieUGeSxwDHEfX8SuSwMwZJSlXyU4GyjbzDw6PsT5DOScWWomiALUIa/1ktC1p5vFEDe7HcH8=',
+  'X-Received: by 10.200.3.87 with SMTP id w23mr15494938qtg.98.1508680821032; Sun, 22 Oct 2017 07:00:21 -0700 (PDT)',
+  'MIME-Version: 1.0',
+  'Received: by 10.12.141.15 with HTTP; Sun, 22 Oct 2017 07:00:00 -0700 (PDT)',
+  'From: Marcellin Nshimiyimana <mars@fusemachines.com>',
+  'Date: Sun, 22 Oct 2017 19:45:00 +0545',
+  'Message-ID: <CAOwpMi-cqMgYZ4BqFeP2QASdS54oqQ6diFfFQn+eVAVhHEC4yw@mail.gmail.com>',
+  'Subject: Test email',
+  'To: Mars-sprint <nmarcellin2@gmail.com>',
+  'Content-Type: multipart/alternative; boundary="f4030435c3286adbf3055c232081"' ]
+======
+
+**Kind**: global function  
 
 -
 
