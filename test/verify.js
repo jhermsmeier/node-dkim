@@ -4,17 +4,15 @@ var DKIM = require('..')
 
 describe('DKIM', function () {
 
-  describe('processSignature()', function () {
+  describe('.verify.filterSignatureHeaders()', function () {
     context('When Gmail raw message has multiple signatures', function () {
-
-      var processSignature = DKIM.verify.processSignature
 
       it('excludes extra signature headers', function () {
         var headers = require('./data/verify-headers')
         var signatureHeader = require('./data/verify-signature-header')
         var otherSignatureHeader = require('./data/verify-other-signature-header')
 
-        var result = processSignature(headers, signatureHeader)
+        var result = DKIM.verify.filterSignatureHeaders(headers, signatureHeader)
 
         assert.ok(headers.indexOf(signatureHeader) > -1)
         assert.ok(headers.indexOf(otherSignatureHeader) > -1)

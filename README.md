@@ -31,17 +31,18 @@ $ npm install --save dkim
     * [.processHeader(headers, signHeaders, method)](#DKIM.processHeader) ⇒ <code>String</code>
     * [.verifySignature(body, headers, callback)](#DKIM.verifySignature)
     * [.verify(message, callback)](#DKIM.verify)
+        * [.filterSignatureHeaders(headers, signatureHeader)](#DKIM.verify.filterSignatureHeaders) ⇒ <code>Array.&lt;String&gt;</code>
 
 
--
+* * *
 
 <a name="DKIM.Signature"></a>
 
 #### DKIM.Signature
-**Kind**: static class of <code>[DKIM](#DKIM)</code>  
+**Kind**: static class of [<code>DKIM</code>](#DKIM)  
 **See**: [dkim-signature](https://github.com/jhermsmeier/node-dkim-signature)  
 
--
+* * *
 
 <a name="new_DKIM.Signature_new"></a>
 
@@ -49,15 +50,15 @@ $ npm install --save dkim
 DKIM Signature
 
 
--
+* * *
 
 <a name="DKIM.Key"></a>
 
 #### DKIM.Key
-**Kind**: static class of <code>[DKIM](#DKIM)</code>  
+**Kind**: static class of [<code>DKIM</code>](#DKIM)  
 **See**: [dkim-key](https://github.com/jhermsmeier/node-dkim-key)  
 
--
+* * *
 
 <a name="new_DKIM.Key_new"></a>
 
@@ -65,49 +66,49 @@ DKIM Signature
 DKIM Key
 
 
--
+* * *
 
 <a name="DKIM.NONE"></a>
 
 #### DKIM.NONE : <code>String</code>
-**Kind**: static property of <code>[DKIM](#DKIM)</code>  
+**Kind**: static property of [<code>DKIM</code>](#DKIM)  
 
--
+* * *
 
 <a name="DKIM.OK"></a>
 
 #### DKIM.OK : <code>String</code>
-**Kind**: static property of <code>[DKIM](#DKIM)</code>  
+**Kind**: static property of [<code>DKIM</code>](#DKIM)  
 
--
+* * *
 
 <a name="DKIM.TEMPFAIL"></a>
 
 #### DKIM.TEMPFAIL : <code>String</code>
-**Kind**: static property of <code>[DKIM](#DKIM)</code>  
+**Kind**: static property of [<code>DKIM</code>](#DKIM)  
 
--
+* * *
 
 <a name="DKIM.PERMFAIL"></a>
 
 #### DKIM.PERMFAIL : <code>String</code>
-**Kind**: static property of <code>[DKIM](#DKIM)</code>  
+**Kind**: static property of [<code>DKIM</code>](#DKIM)  
 
--
+* * *
 
 <a name="DKIM.getKey"></a>
 
 #### DKIM.getKey(domain, [selector], callback)
 Retrieve a domain key
 
-**Kind**: static method of <code>[DKIM](#DKIM)</code>  
-**Note**: Throw error if the public key is not a Buffer  
+**Kind**: static method of [<code>DKIM</code>](#DKIM)  
 **Todo**
 
 - [ ] DNS seems to FORMERR on unregistered / expired domains,
 which maybe should be a TEMPFAIL (?)
 - [ ] make this `public_key = dkim_find_key(q_val, d_val, s_val)`,
 where `*_val` are the signature's attribute values
+- [ ] Throw error if the public key is not a Buffer
 
 **Params**
 
@@ -116,7 +117,7 @@ where `*_val` are the signature's attribute values
 - callback <code>function</code>
 
 
--
+* * *
 
 <a name="DKIM.processBody"></a>
 
@@ -124,7 +125,7 @@ where `*_val` are the signature's attribute values
 Canonicalize the message body according to
 methods defined in RFC[XXXX]
 
-**Kind**: static method of <code>[DKIM](#DKIM)</code>  
+**Kind**: static method of [<code>DKIM</code>](#DKIM)  
 **Throws**:
 
 - <code>Error</code> If canonicalization method is unsupported
@@ -135,7 +136,7 @@ methods defined in RFC[XXXX]
 - method <code>String</code> - (simple|relaxed)
 
 
--
+* * *
 
 <a name="DKIM.processHeader"></a>
 
@@ -143,9 +144,7 @@ methods defined in RFC[XXXX]
 Canonicalize the message header according to
 methods defined in RFC[6376]
 
-example usage: `DKIM.processHeader([ 'A: X', 'B : Y\t\r\n\tZ  '], ['A'], 'relaxed')`
-
-**Kind**: static method of <code>[DKIM](#DKIM)</code>  
+**Kind**: static method of [<code>DKIM</code>](#DKIM)  
 **Throws**:
 
 - <code>Error</code> If canonicalization method is unsupported
@@ -156,15 +155,19 @@ example usage: `DKIM.processHeader([ 'A: X', 'B : Y\t\r\n\tZ  '], ['A'], 'relaxe
 - signHeaders <code>Array</code>
 - method <code>String</code> - (simple|relaxed)
 
+**Example**  
+```js
+DKIM.processHeader( [ 'A: X', 'B : Y\t\r\n\tZ  '], [ 'A' ], 'relaxed' )
+```
 
--
+* * *
 
 <a name="DKIM.verifySignature"></a>
 
 #### DKIM.verifySignature(body, headers, callback)
 Verify a message signature
 
-**Kind**: static method of <code>[DKIM](#DKIM)</code>  
+**Kind**: static method of [<code>DKIM</code>](#DKIM)  
 **Params**
 
 - body <code>Buffer</code>
@@ -172,14 +175,14 @@ Verify a message signature
 - callback <code>function</code>
 
 
--
+* * *
 
 <a name="DKIM.verify"></a>
 
 #### DKIM.verify(message, callback)
 Verify a message's signatures
 
-**Kind**: static method of <code>[DKIM](#DKIM)</code>  
+**Kind**: static method of [<code>DKIM</code>](#DKIM)  
 **Throws**:
 
 - <code>Error</code> If input is not a buffer
@@ -190,51 +193,20 @@ Verify a message's signatures
 - callback <code>function</code>
 
 
--
+* * *
 
-<a name="processSignature"></a>
+<a name="DKIM.verify.filterSignatureHeaders"></a>
 
-### processSignature()
-For messages that have multiple signatures,
-We want add headers to each signature without including signature headers of other signatures
+##### verify.filterSignatureHeaders(headers, signatureHeader) ⇒ <code>Array.&lt;String&gt;</code>
+Filter out signature headers other than the specified `signatureHeader`
 
-ex: 
-Input
-===== 1 =====
-[ 'DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;\r\n        d=fusemachines.com; s=google;\r\n        h=mime-version:from:date:message-id:subject:to;\r\n        bh=9w2H8ucfF1w3+Zqu9gpPcHgTU9GHPjw7E2HYHHlZEkw=;\r\n        b=iPc3RHh9oXL6+dvuPM0hYt1vdj6U4hN83BFxhumWsSXnFDFmbSG4OtXHPF823HoZAA\r\n         4MbFQu5VgfvAQ+FmnKyfON2WdJrAYicyslVXlcA6l0UKSGIH/0NHSqi/kX+4KEKaClY7\r\n         jZkXZZ8EIl5IUBdRRUWSsySFOtrQ/9IeAb6YM=',
-  'X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;\r\n        d=1e100.net; s=20161025;\r\n        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;\r\n        bh=9w2H8ucfF1w3+Zqu9gpPcHgTU9GHPjw7E2HYHHlZEkw=;\r\n        b=gaapyixgX52/f91ifJ2hxRuk13TLcG1ZKUo+Ci3j5a6rKCISPtmLXxwaXq5tghh5qg\r\n         r7S/oe5nDijJmdo1pIBDYGf9U+IDgIT9jHxP3pUoLwmhgnO3pr1di1JH0361ogIsGq/W\r\n         wATmvMTeEA1jAnKw8sr9Rb+jl2MUhqZLhL5Lhkdx/l5CCI0mfUmRAuv1XvGKdrPexM00\r\n         4UTNx9VeK8qYQ/jdf1BiX0ICrj/7e5hSImZ44ctHzn/HA3Htur6cBdFlAVHpW5/vPj0q\r\n         xnz5KQATcG0GmTX2rF27SGhAyPzRl+CZ0SDg9cGV2CvQ5kbDxsxOdzotR2X4hqksqMcC\r\n         S+EQ==',
-  'X-Gm-Message-State: AMCzsaVGkvHZbfZofPrsj3QKBCLwg3nAsBM8cWdu5BXU7v1zENATSRJC uiG27aeGnsU8HjTsRFYk1HqnrNYGNuxg5R7wfRrnRw==',
-  'X-Google-Smtp-Source: ABhQp+RznzRtpIGeOvxieUGeSxwDHEfX8SuSwMwZJSlXyU4GyjbzDw6PsT5DOScWWomiALUIa/1ktC1p5vFEDe7HcH8=',
-  'X-Received: by 10.200.3.87 with SMTP id w23mr15494938qtg.98.1508680821032; Sun, 22 Oct 2017 07:00:21 -0700 (PDT)',
-  'MIME-Version: 1.0',
-  'Received: by 10.12.141.15 with HTTP; Sun, 22 Oct 2017 07:00:00 -0700 (PDT)',
-  'From: Marcellin Nshimiyimana <mars@fusemachines.com>',
-  'Date: Sun, 22 Oct 2017 19:45:00 +0545',
-  'Message-ID: <CAOwpMi-cqMgYZ4BqFeP2QASdS54oqQ6diFfFQn+eVAVhHEC4yw@mail.gmail.com>',
-  'Subject: Test email',
-  'To: Mars-sprint <nmarcellin2@gmail.com>',
-  'Content-Type: multipart/alternative; boundary="f4030435c3286adbf3055c232081"' ]
-===== 2 =====
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;\r\n        d=fusemachines.com; s=google;\r\n        h=mime-version:from:date:message-id:subject:to;\r\n        bh=9w2H8ucfF1w3+Zqu9gpPcHgTU9GHPjw7E2HYHHlZEkw=;\r\n        b=iPc3RHh9oXL6+dvuPM0hYt1vdj6U4hN83BFxhumWsSXnFDFmbSG4OtXHPF823HoZAA\r\n         4MbFQu5VgfvAQ+FmnKyfON2WdJrAYicyslVXlcA6l0UKSGIH/0NHSqi/kX+4KEKaClY7\r\n         jZkXZZ8EIl5IUBdRRUWSsySFOtrQ/9IeAb6YM=
-=====
+**Kind**: static method of [<code>verify</code>](#DKIM.verify)  
+**Returns**: <code>Array.&lt;String&gt;</code> - filtered headers  
+**Params**
 
-Output
-======
-[ 'DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;\r\n        d=fusemachines.com; s=google;\r\n        h=mime-version:from:date:message-id:subject:to;\r\n        bh=9w2H8ucfF1w3+Zqu9gpPcHgTU9GHPjw7E2HYHHlZEkw=;\r\n        b=iPc3RHh9oXL6+dvuPM0hYt1vdj6U4hN83BFxhumWsSXnFDFmbSG4OtXHPF823HoZAA\r\n         4MbFQu5VgfvAQ+FmnKyfON2WdJrAYicyslVXlcA6l0UKSGIH/0NHSqi/kX+4KEKaClY7\r\n         jZkXZZ8EIl5IUBdRRUWSsySFOtrQ/9IeAb6YM=',
-  'X-Gm-Message-State: AMCzsaVGkvHZbfZofPrsj3QKBCLwg3nAsBM8cWdu5BXU7v1zENATSRJC uiG27aeGnsU8HjTsRFYk1HqnrNYGNuxg5R7wfRrnRw==',
-  'X-Google-Smtp-Source: ABhQp+RznzRtpIGeOvxieUGeSxwDHEfX8SuSwMwZJSlXyU4GyjbzDw6PsT5DOScWWomiALUIa/1ktC1p5vFEDe7HcH8=',
-  'X-Received: by 10.200.3.87 with SMTP id w23mr15494938qtg.98.1508680821032; Sun, 22 Oct 2017 07:00:21 -0700 (PDT)',
-  'MIME-Version: 1.0',
-  'Received: by 10.12.141.15 with HTTP; Sun, 22 Oct 2017 07:00:00 -0700 (PDT)',
-  'From: Marcellin Nshimiyimana <mars@fusemachines.com>',
-  'Date: Sun, 22 Oct 2017 19:45:00 +0545',
-  'Message-ID: <CAOwpMi-cqMgYZ4BqFeP2QASdS54oqQ6diFfFQn+eVAVhHEC4yw@mail.gmail.com>',
-  'Subject: Test email',
-  'To: Mars-sprint <nmarcellin2@gmail.com>',
-  'Content-Type: multipart/alternative; boundary="f4030435c3286adbf3055c232081"' ]
-======
+- headers <code>Array.&lt;String&gt;</code> - list of headers to filter
+- signatureHeader <code>String</code> - signature header to keep
 
-**Kind**: global function  
 
--
+* * *
 
