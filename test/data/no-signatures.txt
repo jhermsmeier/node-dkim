@@ -1,0 +1,8 @@
+Message-Id: <F5B196D4-10CD-4876-822F-59C5C39D520E@example.com>
+From: Some One <someone@example.com>
+To: someone-else@example.com
+Content-Transfer-Encoding: 7bit
+Subject: Plain text only
+Date: Tue, 14 Nov 2017 12:42:15 +0100
+
+This message contains only plain text.
