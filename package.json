@@ -15,8 +15,8 @@
   ],
   "main": "lib/dkim.js",
   "dependencies": {
-    "dkim-key": "~1.1.2",
-    "dkim-signature": "~1.1.2"
+    "dkim-key": "^1.2.0",
+    "dkim-signature": "^1.2.0"
   },
   "devDependencies": {
     "jsdoc-to-markdown": "^4.0.1",
