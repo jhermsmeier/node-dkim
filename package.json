@@ -19,8 +19,8 @@
     "dkim-signature": "~1.1.2"
   },
   "devDependencies": {
-    "jsdoc-to-markdown": "^3.0.0",
-    "mocha": "^4.0.1"
+    "jsdoc-to-markdown": "^4.0.1",
+    "mocha": "^5.2.0"
   },
   "scripts": {
     "test": "mocha",
