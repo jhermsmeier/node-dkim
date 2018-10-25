@@ -10,7 +10,7 @@ describe( 'DKIM', function() {
 
       it( 'normalizes empty body', function() {
 
-        var body = new Buffer( '', 'ascii' )
+        var body = Buffer.from( '', 'ascii' )
         var result = DKIM.processBody( body, 'simple' )
         var hash = crypto.createHash( 'sha256' )
           .update( result )
@@ -23,7 +23,7 @@ describe( 'DKIM', function() {
 
       it( 'normalizes RFC 6376 Example 2', function() {
 
-        var body = new Buffer( ' C \r\nD \t E\r\n\r\n\r\n', 'ascii' )
+        var body = Buffer.from( ' C \r\nD \t E\r\n\r\n\r\n', 'ascii' )
         var result = DKIM.processBody( body, 'simple' )
 
         assert.equal( result, ' C \r\nD \t E\r\n' )
@@ -36,7 +36,7 @@ describe( 'DKIM', function() {
 
       it( 'normalizes empty body', function() {
 
-        var body = new Buffer( '', 'ascii' )
+        var body = Buffer.from( '', 'ascii' )
         var result = DKIM.processBody( body, 'relaxed' )
         var hash = crypto.createHash( 'sha256' )
           .update( result )
@@ -49,7 +49,7 @@ describe( 'DKIM', function() {
 
       it( 'normalizes RFC 6376 Example 1', function() {
 
-        var body = new Buffer( ' C \r\nD \t E\r\n\r\n\r\n', 'ascii' )
+        var body = Buffer.from( ' C \r\nD \t E\r\n\r\n\r\n', 'ascii' )
         var result = DKIM.processBody( body, 'relaxed' )
 
         assert.equal( result, ' C\r\nD E\r\n' )
