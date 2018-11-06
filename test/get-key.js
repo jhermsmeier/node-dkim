@@ -7,7 +7,7 @@ describe( 'DKIM', function() {
 
     context( 'when key record exists', function() {
 
-      it( 'parse & return the key', function( done ) {
+      specify( 'parse & return the key', function( done ) {
         DKIM.getKey( 'gmail.com', '20120113', function( error, key ) {
           assert.ifError( error )
           assert.equal( key instanceof DKIM.Key, true )
@@ -20,7 +20,7 @@ describe( 'DKIM', function() {
 
     context( 'when key record does not exist', function() {
 
-      it( 'PERMFAIL if domain has no record', function( done ) {
+      specify( 'PERMFAIL if domain has no record', function( done ) {
         DKIM.getKey( 'aa', function( error, key ) {
           assert.equal( key, null )
           assert.equal( error instanceof Error, true )
@@ -29,18 +29,17 @@ describe( 'DKIM', function() {
         })
       })
 
-      it( 'PERMFAIL if TXT record is not a valid key', function( done ) {
+      specify( 'PERMFAIL if TXT record is not a valid key', function( done ) {
         DKIM.getKey( 'gmail.com', function( error, key ) {
-          
-          assert.ok( key, 'key instance present' )
-          assert.ok( key.key == null, 'key is null' )
-          assert.equal( error instanceof Error, true, 'error is an instance of Error Class' )
-          assert.equal( error.code, DKIM.PERMFAIL, 'Error code is PERMFAIL' )
+          assert.ok( key, 'key instance not present' )
+          assert.ok( key.key == null, 'key is not null' )
+          assert.equal( error instanceof Error, true, 'error not an instance of Error Class' )
+          assert.equal( error.code, DKIM.PERMFAIL, 'Error code is not PERMFAIL' )
           done()
         })
       })
 
-      it( 'TEMPFAIL if query fails to respond' )
+      specify( 'TEMPFAIL if query fails to respond' )
 
     })
 
