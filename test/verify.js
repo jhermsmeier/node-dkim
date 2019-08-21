@@ -26,6 +26,25 @@ describe('DKIM', function () {
 
     })
 
+    context('When provided Exchange raw message', function () {
+
+      it('returns an object with verified set to true', function (done) {
+
+        var message = fs.readFileSync( path.join( __dirname, 'data', 'exchange-raw.txt' ) )
+
+        DKIM.verify( message, function( error, res ) {
+          assert.ifError( error )
+          assert.ok( res && res.length > 0 )
+          assert.ok( res.every( function( record ) {
+            return record.verified
+          }))
+          done( error )
+        })
+
+      })
+
+    })
+
     context( 'email contains no signatures', function() {
 
       it( 'does not hang', function( done ) {
