@@ -14,6 +14,7 @@
     "message"
   ],
   "main": "lib/dkim.js",
+  "types": "lib/dkim.d.ts",
   "dependencies": {
     "dkim-key": "^1.2.0",
     "dkim-signature": "^1.2.0"
