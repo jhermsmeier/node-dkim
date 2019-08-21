@@ -1,0 +1,119 @@
+Delivered-To: martin.kopecek@smallhill.cz
+Received: by 2002:a05:6638:4e:0:0:0:0 with SMTP id a14csp738917jap;
+        Wed, 21 Aug 2019 03:27:04 -0700 (PDT)
+X-Google-Smtp-Source: APXvYqwifkg4tKdvkCngHbGS6Ze7Y2qmjAXD1TfsfNE80exp+/ewjLVJyrt/94N9LDh9gagfNLit
+X-Received: by 2002:a5d:4ec6:: with SMTP id s6mr1860724wrv.327.1566383224720;
+        Wed, 21 Aug 2019 03:27:04 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1566383224; cv=none;
+        d=google.com; s=arc-20160816;
+        b=XXJaMcjw26pX/WYTqZ4dsGSIq1C0tw4YS8YflnS9uCuaIhOQ5tPlrfPtI/DtAL8zED
+         sR5qXEhcOfUGZxtZ3FotvYbxEIKZD/AKcRm/YqfbYAfyUN+6vFEJaChzRu8MYGIuKfIt
+         uwWr4BcVju1+Ot0yK6gKV3rqlAPpZEIJTTIBukYo1iK/P/8fIGQYi+bJX2d8WrIr7NIP
+         UQYOa+15Zi0FtOUzF49QbNxpQZcTGg02+riTasm8rwtfbril8XThxmYsT20JY+dedoxC
+         kc+iCH4eqXziGptu5XZj6DiF9qyWqH+ycVdSyyNvT/kZc8M+4DQ+hdfIKcOtwhfo0fhE
+         JJdg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=mime-version:content-transfer-encoding:content-language
+         :accept-language:message-id:date:importance:thread-index
+         :thread-topic:subject:to:from:dkim-signature;
+        bh=N8CAKqqv5addtDBDxnOc9t0QohU0E+hfQ5YimAN2T+M=;
+        b=vE/Wk7odNc2hI0unX9TKcCh956jnlELDoOC+DENAG43kbqpxuu3IJQrrByCNaA1kRx
+         xsAToPXjFFzYsWLN5oqT1mpGFWiaSo9O36W+xZ4UfA7aTV1r1zDhxEc7zEcgiu6E6AX4
+         9i7uzURndagNKFJMuBIjJ1Wpy1ZBfzs44SQKZUBNieI6ApbGlOyeMD2yv5SYBBmbIS/9
+         CCsVdsINaPnueqYu0ypUPdr00tStEL6P6TMyKZR1lzRviXk/GZFsJ0Mtso2+zmv6RoUj
+         fFcCtkBn0BkGB6YDpE4AIG9LFKycF86uT8aCMLcfwL9MGokOIDH0U/wQ8UgIZNi5TSHr
+         Zb2Q==
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@mfcr.cz header.s=selector1 header.b=MysnnqjW;
+       spf=pass (google.com: domain of martin.kopecek@mfcr.cz designates 185.16.180.80 as permitted sender) smtp.mailfrom=Martin.Kopecek@mfcr.cz;
+       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=mfcr.cz
+Return-Path: <Martin.Kopecek@mfcr.cz>
+Received: from mail-gw2.mfcr.cz (mail-gw3.mfcr.cz. [185.16.180.80])
+        by mx.google.com with ESMTPS id r2si15825954wrw.71.2019.08.21.03.27.04
+        for <martin.kopecek@smallhill.cz>
+        (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+        Wed, 21 Aug 2019 03:27:04 -0700 (PDT)
+Received-SPF: pass (google.com: domain of martin.kopecek@mfcr.cz designates 185.16.180.80 as permitted sender) client-ip=185.16.180.80;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@mfcr.cz header.s=selector1 header.b=MysnnqjW;
+       spf=pass (google.com: domain of martin.kopecek@mfcr.cz designates 185.16.180.80 as permitted sender) smtp.mailfrom=Martin.Kopecek@mfcr.cz;
+       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=mfcr.cz
+DKIM-Signature: v=1; a=rsa-sha256; d=mfcr.cz; s=selector1; c=relaxed/simple;
+	q=dns/txt; i=@mfcr.cz; t=1566383224; x=1568975224;
+	h=From:Sender:Reply-To:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:
+	Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+	List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+	bh=N8CAKqqv5addtDBDxnOc9t0QohU0E+hfQ5YimAN2T+M=;
+	b=MysnnqjWWReePjF+kTu/XM+aN+t5460CTcWCqWEqrC0pf+PfHalfdy2zpZloltZ3
+	tzHGk19UsBTcBdbd8aoPq3Kmoc944BBQs/8NYm0C9qOOYsvI18Ij2HLrWxtn9tWe
+	izexjuRNkKEMqWZH+ECfaaMN2H+O/qSaR62Reuxz/qxEe1T/6LeIiRSqq3618EXO
+	uySNM3rfWvYLYQkLqT8sCOqG3JKFvXPf+99OyIJajz7I5OeIXMMAyM4XAOcuYwu6
+	lh6DlTyJ8V2DR0t9prmylRe0qh2g4ezdb/Bj1B1sGKqTimMtullXoOUp9s83OGfh
+	I8S/l0/1VqESzcXLKZ31MQ==;
+X-AuditID: b910b61a-587ff70000003cc4-64-5d5d1c78743e
+Received: from MF10MX22.urad.mfcr.cz (mf10mx22.urad.mfcr.cz [172.16.14.247])
+	(using TLS with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
+	(Client did not present a certificate)
+	by mail-gw2.mfcr.cz (mail-gw) with SMTP id E1.3A.15556.87C1D5D5; Wed, 21 Aug 2019 12:27:04 +0200 (CEST)
+From: =?utf-8?B?S29wZcSNZWsgTWFydGluIEJjLg==?= <Martin.Kopecek@mfcr.cz>
+To: =?utf-8?B?TWFydGluIEtvcGXEjWVr?= <martin.kopecek@smallhill.cz>
+Subject: DKIM Test
+Thread-Topic: DKIM Test
+Thread-Index: AdVYCusoT5bqTskVSjyMncuQTkw6ww==
+Importance: high
+X-Priority: 1
+Date: Wed, 21 Aug 2019 10:27:04 +0000
+Message-ID: <D355E13D32E5C244A49095AC4F223DEE02386925AC@mf10mx19.urad.mfcr.cz>
+Accept-Language: cs-CZ, en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+x-originating-ip: [172.16.44.155]
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+MIME-Version: 1.0
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrKIsWRmVeSWpSXmKPExsWyRoDvu26FTGyswYYmIYuGhbOZHBg9Nn3v
+	YgxgjAqzyUhNTEktUkjNS85PycxLt1XyDPbXtbAwtdQ1VFLIS8xNtVWK0A1OTszLS03RdapU
+	UihLzCkFCgZX5iYCLUlW8E0tLk5MB2pVcE8sSS1PrFTSt0sIy2jZtoO94I9gxZmHC1gbGA8I
+	djFyckgImEj0rOli6WLk4hASmMsk0TDpP3sXIwcHm4C7xOUpKSA1IgJOEnMvNTCD2MICQhJ3
+	f6xhBSkRERCXODUzH6JET+Ltix4mEJtTQEDiV/ssFojxvBJT5p5kB7FZBFQlpiy6wwZi8wr4
+	SbRdnAdmMwrISuzp/MwIYjMDjbz1ZD4TRK+AxJI955khbFGJl4//sULYihKL5mxmAjmBWUBT
+	Yv0ufYhWRYkp3Q/ZIcYLSpyc+YRlAqPwLCRTZyF0zELSMQtJxwJGllWMArlpBga5FQYmerlp
+	yUV6yVWbGIGRtlNgm9QOxo4PTocYmTgYDzH6AH00kVlKNDkfGOh5JfGGpsamJiamJkaWpham
+	OISVxHnjGGJihQTSgRGTnZpakFoUX1Sak1oMMpNTqoHxWHjVB+9rql+V7bIW/J69+KRWq9++
+	rfcrd4b/2hudvyTk5P2Q5z+fpjyZbLGSyS6PuYCT//PPW4vqQtccmKSyJiOeV6xamP3Tz/KO
+	q9Uzv8wPehzpUC33NePV2h+x/3Yluaet57jKGFriaSiiKnWsVi9Ooars66Sj0YyHjU+n+p10
+	7d5rejVGiaU4I9FQi7moOBEAs6kSQLgCAAA=
+X-Scanned-By: Symantec Messaging Gateway
+
+VGVzdCBib2R5DQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXw0KVGF0byBlLW1haWxv
+dsOhIHpwcsOhdmEgbcOhIHBvdXplIGluZm9ybWF0aXZuw60gY2hhcmFrdGVyIGEgdnljaMOhesOt
+IHogcG9ka2xhZMWvLCBrdGVyw6kgYnlseSBvZGVzw61sYXRlbGkgcMWZZWTDoW55IG5lYm8gemFz
+bMOhbnkgdiBtaW51bG9zdGkuIE9ic2FoIHTDqXRvIGUtbWFpbG92w6kgenByw6F2eSwgcmVzcC4g
+amFrw6lrb2xpdiBwxZnDrXBhZG7DqSBwcsOhdm7DrSBqZWRuw6Fuw60gdnlwbMO9dmFqw61jw60g
+eiB0w6l0byBlLW1haWxvdsOpIHpwcsOhdnksIHNlIG5lcG92YcW+dWplIHphIG7DoXZyaCBuYSB1
+emF2xZllbsOtIHNtbG91dnkgdmUgc215c2x1IHVzdGFub3ZlbsOtIMKnIDE3MzEgesOha29uYSDE
+jS4gODkvMjAxMiBTYi4sIG9ixI1hbnNrw6lobyB6w6Frb27DrWt1LCB2IHBsYXRuw6ltIHpuxJtu
+w60gKGTDoWxlIGplbiDigJ5vYsSNYW5za8O9IHrDoWtvbsOta+KAnCkgbmVibyBha2NlcHRhY2kg
+bsOhdnJodSBuYSB1emF2xZllbsOtIHNtbG91dnkgdmUgc215c2x1IMKnIDE3NDAgb2LEjWFuc2vD
+qWhvIHrDoWtvbsOta3UsIHBvcMWZLiBwb3R2cnplbsOtIHV6YXbFmWVuw60gc21sdXZuw61obyB2
+enRhaHUsIG5lbsOtLWxpIG9kZXPDrWxhdGVsZW0gdXZlZGVubyB2w71zbG92bsSbIGppbmFrLiBQ
+xZllZG3Em3Ruw6EgZS1tYWlsb3bDoSBrb3Jlc3BvbmRlbmNlIHNsb3XFvsOtIHbDvWhyYWRuxJsg
+ayBwb2Rwb8WZZSB2w71rb251IGFnZW5keSBNaW5pc3RlcnN0dmEgZmluYW5jw60uIFYgdXZlZGVu
+w6kgc291dmlzbG9zdGkgbcWvxb5lIHRhdG8gZS1tYWlsb3bDoSB6cHLDoXZhIG9ic2Fob3ZhdCDD
+umRhamUsIGt0ZXLDqSBqc291IGRvdMSNZW55IE5hxZnDrXplbsOtbSBFdnJvcHNrw6lobyBQYXJs
+YW1lbnR1IGEgUmFkeSAoRVUpIDIwMTYvNjc5IHplIGRuZSAyNy4gZHVibmEgMjAxNiwgbyBvY2hy
+YW7EmyBmeXppY2vDvWNoIG9zb2IgdiBzb3V2aXNsb3N0aSBzZSB6cHJhY292w6Fuw61tIG9zb2Ju
+w61jaCDDumRhasWvIGEgbyB2b2xuw6ltIHBvaHlidSB0xJtjaHRvIMO6ZGFqxa8gYSBvIHpydcWh
+ZW7DrSBzbcSbcm5pY2UgOTUvNDYvRVMgKG9iZWNuw6kgbmHFmcOtemVuw60gbyBvY2hyYW7EmyBv
+c29ibsOtY2ggw7pkYWrFrykuIFRhdG8gZS1tYWlsb3bDoSB6cHLDoXZhIGplIHVyxI1lbmEgcG91
+emUgcHJvIG9zb2Juw60gYSBkxa92xJtybsOpIHXFvml0w60gdXLEjWVuw71taSBhZHJlc8OhdHks
+IHRlZHkgb3NvYm91IChvc29iYW1pKSwga3RlcsOpIChrdGVyw71tKSBqZSBvYnNhaG92xJsgdXLE
+jWVuYS4gTmVqc3RlLWxpIG9zb2JvdSwga3RlcsOpIGplIHRhdG8genByw6F2YSB1csSNZW5hLCB1
+cG96b3LFiHVqZW1lIFbDoXMsIMW+ZSBqYWvDqWtvbGl2IMWhw63FmWVuw60gxI1pIGtvcMOtcm92
+w6Fuw60gdMOpdG8gZS1tYWlsb3bDqSB6cHLDoXZ5LCDEjWkgaW5mb3JtYWNlIHogbsOtLCBqZSB6
+YWvDoXrDoW5vLiBKZXN0bGnFvmUgdHV0byBlLW1haWxvdm91IHpwcsOhdnUgb2JkcsW+w610ZSBu
+ZWRvcGF0xZllbsOtbSwgcHJvc8OtbWUsIG96bmFtdGUgdHV0byBza3V0ZcSNbm9zdCBvZGVzw61s
+YXRlbGkgYSBvZHN0cmHFiHRlIHpwcsOhdnUgc2Ftb3Rub3UgaSB2xaFlY2hueSBqZWrDrSBwxZnD
+rWxvaHkgemUgc3bDqWhvIHN5c3TDqW11Lg0K
