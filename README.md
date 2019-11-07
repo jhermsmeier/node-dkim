@@ -10,6 +10,14 @@
 $ npm install --save dkim
 ```
 
+## References
+
+- [RFC 6368 - DomainKeys Identified Mail (DKIM) Signatures](https://tools.ietf.org/html/rfc6376)
+- [RFC 8301 - Cryptographic Algorithm and Key Usage Update to DomainKeys Identified Mail (DKIM)](https://tools.ietf.org/html/rfc8301)
+- [RFC 8463 - A New Cryptographic Signature Method for DomainKeys Identified Mail (DKIM)](https://tools.ietf.org/html/rfc8463)
+- [RFC 8616 - Email Authentication for Internationalized Mail](https://tools.ietf.org/html/rfc8616)
+- [RFC 7489 - Domain-based Message Authentication, Reporting, and Conformance (DMARC)](https://tools.ietf.org/html/rfc7489)
+
 ## API
 
 <a name="DKIM"></a>
