@@ -3,7 +3,7 @@ var fs = require( 'fs' )
 
 var filename = process.argv.slice( 2 ).shift()
 if( !filename ) {
-  console.error( 'Usage: node example/check.js <filename>' )
+  console.error( 'Usage: node example/verify.js <filename>' )
   process.exit( 1 )
 }
 
