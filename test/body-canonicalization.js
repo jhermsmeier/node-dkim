@@ -56,6 +56,18 @@ describe( 'DKIM', function() {
 
       })
 
+      it( 'normalizes UTF-8 body', function() {
+
+        var body = Buffer.from( '‡!⁋  ≠!≈\r\n\r\n', 'utf8' )
+        var result = DKIM.processBody( body, 'relaxed' )
+
+        assert.equal(
+          Buffer.from( result, 'binary' ).toString( 'hex' ),
+          Buffer.from( '‡!⁋ ≠!≈\r\n', 'utf8' ).toString( 'hex' )
+        )
+
+      })
+
     })
 
   })
