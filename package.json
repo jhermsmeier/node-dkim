@@ -1,6 +1,6 @@
 {
   "name": "dkim",
-  "version": "0.7.1",
+  "version": "0.7.2",
   "description": "DomainKeys Identified Mail (DKIM)",
   "author": "Jonas Hermsmeier <jhermsmeier@gmail.com> (https://jhermsmeier.de)",
   "license": "MIT",
