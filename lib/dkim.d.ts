@@ -11,12 +11,40 @@ export function processBody(message: string | Buffer, method?: string): string;
 export function processHeader(headers: string[], signHeaders: any[], method: string): string;
 export function processHeader(headers: string[], method: string): string;
 
+interface Signature {
+  algorithm: string,
+  canonical: string,
+  copiedHeaders: [],
+  domain: string,
+  expires: null | string,
+  hash: Buffer,
+  headers: [],
+  identity: null,
+  length: null,
+  query: string,
+  selector: string,
+  signature: Buffer,
+  timestamp: null | string,
+  version: string
+}
+
+interface Key {
+  version: null | string,
+  type: string,
+  flags: string,
+  granularity: null | string,
+  hash: null,
+  notes: null,
+  service: null,
+  key: Buffer
+}
+
 export interface VerifyResult {
   verified: false;
   status: string;
   error: null;
-  signature: null;
-  key: null;
+  signature: Signature;
+  key: Key;
 }
 
 export function verify(message: Buffer, callback: (error: Error, result: VerifyResult[]) => any): void;
